@@ -3,6 +3,7 @@ import { renderMushroom, renderFriend } from './render-utils.js';
 
 const friendsEl = document.querySelector('.friends');
 const friendInputEl = document.getElementById('friend-input');
+const friendFormEl = document.getElementById('friend-form');
 const mushroomsEl = document.querySelector('.mushrooms');
 const addMushroomButton = document.getElementById('add-mushroom-button');
 const addFriendButton = document.getElementById('add-friend-button');
@@ -55,6 +56,29 @@ addFriendButton.addEventListener('click', () => {
         friendData.push(newFriend);
         // reset the input
         friendInputEl.value = '';
+        // display all the friends (use a function here)
+        displayFriends();
+    }
+});
+
+friendFormEl.addEventListener('submit', (e) => {
+    // get the name from the input
+    e.preventDefault();
+    const data = new FormData(friendFormEl);
+
+    if (data.get('friend-name') === '') {
+        const name = `Friend${Math.ceil(Math.random() * 1000)}`;
+        const newFriend = { name:name, satisfaction:1 };
+        friendData.push(newFriend);
+        displayFriends();
+    } else {
+        const name = data.get('friend-name');
+        // create a new friend object
+        const newFriend = { name:name, satisfaction:1 };
+        // push it into the friends state array, passed in as an argument
+        friendData.push(newFriend);
+        // reset the input
+        friendFormEl.reset();
         // display all the friends (use a function here)
         displayFriends();
     }
