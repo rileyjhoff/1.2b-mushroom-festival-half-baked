@@ -70,6 +70,8 @@ function displayFriends() {
                 alert(`${friend.name} is full, and you're out of mushrooms! Time to forage!`);
             } else if (friend.satisfaction < 3 && mushroomCount === 0) {
                 alert(`Oops, you're out of mushrooms! Time to forage!`);
+            } else if (friend.satisfaction === 3 && mushroomCount > 0) {
+                alert(`${friend.name} is full. Maybe another friend could use a mushroom.`);
             } else if (friend.satisfaction < 3 && mushroomCount > 0) {
                 friend.satisfaction++;
                 mushroomCount--;
