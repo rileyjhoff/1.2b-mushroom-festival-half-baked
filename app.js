@@ -9,24 +9,29 @@ const addMushroomButton = document.getElementById('add-mushroom-button');
 const addFriendButton = document.getElementById('add-friend-button');
 // initialize state
 
-let mushroomCount = 3;
+const mushroomArr = [1, 2, 3, 4];
+let mushroomCount = mushroomArr.length;
 
 const friendData = [
     {
         name: 'James',
-        satisfaction: 2,
+        satisfaction: 1,
+        preference: Math.ceil(Math.random() * 4)
     },
     {
         name: 'Tam',
-        satisfaction: 3,
+        satisfaction: 1,
+        preference: Math.ceil(Math.random() * 4)
     },
     {
         name: 'Hunter',
         satisfaction: 1,
+        preference: Math.ceil(Math.random() * 4)
     },
     {
         name: 'Alexa',
-        satisfaction: 2,
+        satisfaction: 1,
+        preference: Math.ceil(Math.random() * 4)
     },
 ];
 
@@ -34,7 +39,7 @@ addMushroomButton.addEventListener('click', () => {
     if (Math.random() > 0.5) {
         alert('found a mushroom!');
 
-        mushroomCount++;
+        mushroomArr.push(Math.ceil(Math.random() * 4));
         displayMushrooms();
     } else {
         alert('no luck!');
@@ -105,9 +110,10 @@ function displayFriends() {
                 alert(`${friend.name} is full. Maybe another friend could use a mushroom.`);
             } else if (friend.satisfaction < 3 && mushroomCount > 0) {
                 friend.satisfaction++;
-                mushroomCount--;
+                mushroomArr.shift();
                 displayFriends();
                 displayMushrooms();
+                console.log(mushroomArr);
             }
         });
         // append the friendEl to the friends list in DOM
@@ -118,12 +124,15 @@ function displayFriends() {
 function displayMushrooms() {
     // clear out the mushroom div
     mushroomsEl.textContent = '';
-    for (let i = 0; i < mushroomCount; i++) {
+    for (let mushrooms of mushroomArr) {
         // for each mushroom in your mushroom state, render and append a mushroom
         const addMushroom = renderMushroom();
+        addMushroom.classList.add(`mushroom-${mushrooms}`);
         mushroomsEl.append(addMushroom);
     }
 }
+
+// Math.ceil(Math.random() * 4)
 
 displayFriends();
 displayMushrooms();
