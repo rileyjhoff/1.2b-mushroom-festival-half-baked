@@ -73,7 +73,7 @@ friendFormEl.addEventListener('submit', (e) => {
 
     if (data.get('friend-name') === '') {
         const name = `Friend${Math.ceil(Math.random() * 1000)}`;
-        const newFriend = { name:name, satisfaction:1 };
+        const newFriend = { name:name, satisfaction:1, preference: Math.ceil(Math.random() * 4) };
         friendData.push(newFriend);
         displayFriends();
     } else {
