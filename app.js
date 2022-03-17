@@ -145,7 +145,5 @@ function displayMushrooms() {
     }
 }
 
-// Math.ceil(Math.random() * 4)
-
 displayFriends();
 displayMushrooms();
