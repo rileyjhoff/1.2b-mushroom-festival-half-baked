@@ -10,7 +10,6 @@ const addFriendButton = document.getElementById('add-friend-button');
 // initialize state
 
 const mushroomArr = [1, 2, 3, 4];
-let mushroomCount = mushroomArr.length;
 
 const friendData = [
     {
@@ -102,32 +101,32 @@ function displayFriends() {
         //             increment the friends satisfaction and decrement your mushrooms
         //             then display your friends and mushrooms with the updated state
         friendEl.addEventListener('click', () => {
-            if (friend.satisfaction === 1 && mushroomCount > 0 && friend.preference !== mushroomArr[0]) {
+            if (mushroomArr.length === 0) {
+                alert('You dont have any mushrooms to give. Time to go foraging!');
+            } else if (friend.satisfaction === 1 && mushroomArr.length > 0 && friend.preference !== mushroomArr[0]) {
                 alert(`${friend.name} HATED that mushroom. They don't feel so good.`);
                 mushroomArr.shift();
                 displayMushrooms();
-            } else if (3 > friend.satisfaction > 1 && mushroomCount > 0 && friend.preference !== mushroomArr[0]) {
+            } else if (friend.satisfaction === 2 && mushroomArr.length > 0 && friend.preference !== mushroomArr[0]) {
                 alert(`${friend.name} HATED that mushroom. They don't feel so good.`);
                 friend.satisfaction--;
                 displayFriends();
                 mushroomArr.shift();
                 displayMushrooms();
-            } else if (friend.satisfaction === 3 && mushroomCount > 0 && friend.preference !== mushroomArr[0]) {
+            } else if (friend.satisfaction === 3 && mushroomArr.length > 0 && friend.preference !== mushroomArr[0]) {
                 alert(`${friend.name} is full, which is good because they dont like that type of mushroom. They'll throw it away for you.`);
                 mushroomArr.shift();
                 displayMushrooms();
-            } else if (3 > friend.satisfaction >= 1 && mushroomCount > 0 && friend.preference === mushroomArr[0]) {
+            } else if (3 > friend.satisfaction >= 1 && mushroomArr.length > 0 && friend.preference === mushroomArr[0]) {
                 alert(`${friend.name} LOVED that mushroom!`);
                 friend.satisfaction++;
                 displayFriends();
                 mushroomArr.shift();
                 displayMushrooms();
-            } else if (friend.satisfaction === 3 && mushroomCount > 0 && friend.preference === mushroomArr[0]) {
+            } else if (friend.satisfaction === 3 && mushroomArr.length > 0 && friend.preference === mushroomArr[0]) {
                 alert(`${friend.name} is full, but they like that kind of mushroom. They'll save it for later.`);
                 mushroomArr.shift();
                 displayMushrooms();
-            } else if (mushroomCount === 0) {
-                alert('You dont have any mushrooms to give. Time to go foraging!');
             }
         });
         // append the friendEl to the friends list in DOM
